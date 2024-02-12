@@ -4,7 +4,7 @@
 
 int userInput() {
     char *username=(char*)malloc(20*sizeof (char));// Allocate memory for 20 characters
-    if(username==NULL){
+    if(username==NULL){//Error Handling for if the memory allocation failed
         printf("Memory allocation failed. ");
         return EXIT_FAILURE;
     }
@@ -36,6 +36,9 @@ int userInput() {
             return EXIT_FAILURE;
         }else{
             user=temp;
+        }
+        if(user[strlen(user)-1]=='\n'){
+            user[strlen(user)-1]='\0';
         }
         char *token = strtok(user," ");
         if (token !=NULL && strcasecmp(username, token) == 0) {

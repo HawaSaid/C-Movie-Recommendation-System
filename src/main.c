@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include "user.c"
-#include "movie.c"
+#include "ratemovie.c"
+#include "recommendation.c"
 
+int moviedatabase(){
+    FILE *movie;
+    movie = fopen("movie_database.txt", "r");
+    if (movie == NULL) {
+        return 1;
+    }
+    int i = 1;
+    char movie1[100];
+    while (fgets(movie1, sizeof(movie1), movie) != NULL) {
+        printf("%d. %s", i, movie1);
+        i++;
+    }
+    fclose(movie);
+    return 0;
+}
 int main(){
     int choice=0;
 
@@ -21,13 +37,15 @@ int main(){
         }
         else if (choice == 2)
         {
-           movie();
+           moviedatabase();
         }
         else if (choice == 3)
         {
+            ratemovie();
         }
         else if (choice == 4)
         {
+            movierec();
         }
 
     } while (choice != 0);
